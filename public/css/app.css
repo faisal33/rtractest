@@ -6256,3 +6256,35 @@ label.second {
   font-size: medium;
 
 }
+
+table.helo { 
+color: #333;
+font-family: Helvetica, Arial, sans-serif;
+border-collapse: collapse; border-spacing: 2; 
+}
+
+td, th { 
+border: 5px solid transparent; 
+height: 45px; 
+text-align: center;
+transition: all 0.4s;  
+}
+
+th {
+text-align: center;
+background: #DFDFDF; 
+font-weight: bold;
+}
+
+td {
+background: #FAFAFA;
+text-align: center;
+}
+
+tr:nth-child(even) td { background: #F1F1F1;  }   
+
+tr:nth-child(odd) td { background: #FEFEFE; }  
+
+tr td:hover { background: #666; color: #FFF; } 
+
+

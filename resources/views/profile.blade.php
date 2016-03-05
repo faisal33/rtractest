@@ -28,6 +28,16 @@
 		 		    </div>
 
 				<br>
+
+
+					<div class="col-md-8 col-md-offset-3">
+								
+								
+							<a class="btn btn-small btn-info" 
+							   href="{{ URL::to('profile/show') }}">
+							   Show all Users</a>
+
+							</div>
 				</div>
 			</div>
 		</div>

@@ -33,6 +33,8 @@ class ProfileController extends Controller {
 
 	public function show($id)
 	{
+		$allusers = DB::table('users')->select(array('name', 'email', 'country'))->get();
+		return view('ShowUsers', ['allprofiles' => $allusers]);
 	}
 
 	public function edit()
