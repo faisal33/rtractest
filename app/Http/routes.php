@@ -13,7 +13,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::resource('profile','ProfileController',
+	array('except' => array('create', 'store')));
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
