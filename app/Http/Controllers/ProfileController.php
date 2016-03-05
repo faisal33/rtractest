@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use DB;
+use Auth;
+
 class ProfileController extends Controller {
 
 
@@ -21,7 +24,11 @@ class ProfileController extends Controller {
 	 */
 	public function index()
 	{
-		return view('profile');
+		$count = array();
+		$count[0] = DB::table('users')->count();
+		$count[1] = DB::table('users')->where('country',Auth::user()->country)->count();
+     	return view('profile',['counts' => $count]);
+		
 	}
 
 	public function show($id)
