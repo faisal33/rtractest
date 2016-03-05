@@ -31,10 +31,29 @@
 				       <a class="btn btn-small btn-info" style="background-color:green" 
 				       href="{{URL::to('profile/browse', array($user->email))}}"> Browse </a>
 					<td>
-    			
-					<td></td>
-					<td></td>
+
+					</td>
+
+					@if($user->name == Auth::user()->name)
+				   <td>
+						<a class="btn btn-small btn-info" style="background-color:orange" 
+						   href="{{ URL::to('profile/' . Auth::user()->email . '/edit') }}">Edit </a>
+
+				   </td>
+
+					<td>
 				
+					{!! Form::open(array('route' => array('profile.destroy', $user->email), 'method' => 'delete')) !!}
+       
+       					 <button type="submit" class="btn btn-primary" style="background-color:red" >Delete</button>
+   					 {!! Form::close() !!}
+
+					</td>
+							  
+					@else
+					<td></td>
+					<td></td>
+					@endif
 
 				</tr>
 			 @endforeach

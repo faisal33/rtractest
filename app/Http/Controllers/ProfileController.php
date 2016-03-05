@@ -1,43 +1,34 @@
 <?php namespace App\Http\Controllers;
-
-use DB;
 use Auth;
+use DB;
 use Input;
 use Illuminate\Support\Facades\Validator;
+
 
 class ProfileController extends Controller {
 
 
-
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
 
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
+
 	public function index()
 	{
 		$count = array();
 		$count[0] = DB::table('users')->count();
 		$count[1] = DB::table('users')->where('country',Auth::user()->country)->count();
      	return view('profile',['counts' => $count]);
-		
 	}
 
 	public function show($id)
 	{
+
 		$allusers = DB::table('users')->select(array('name', 'email', 'country'))->get();
-		return view('ShowUsers', ['allprofiles' => $allusers]);
+		return view('showUsers', ['allprofiles' => $allusers]);
 	}
+
 
 	public function edit()
 	{
@@ -48,10 +39,16 @@ class ProfileController extends Controller {
 
 	public function destroy($id)
 	{
+
+			DB::table('users')->where('email', $id)->delete();
+			Auth::logout();
+			return Redirect('profile');
+         
 	}
 
 	public function update()
-	{  
+	{        
+
 		$rules = array(
             'name' => 'required|max:255',
 			'phone' => 'required|max:15',
@@ -81,7 +78,10 @@ class ProfileController extends Controller {
 
                	return Redirect('profile');
         	  }
+
 	}
+
+	// New method created to help browsing through all the profiles
 
 	public function browUser($id)
 	{
