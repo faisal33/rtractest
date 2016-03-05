@@ -48,4 +48,12 @@ class ProfileController extends Controller {
 	public function update()
 	{  
 	}
+
+	public function browUser($id)
+	{
+
+		$browseduser = DB::table('users')->where('email', $id)->first();
+		return view('browse', ['curruser' => $browseduser]);
+		
+	} 
 }

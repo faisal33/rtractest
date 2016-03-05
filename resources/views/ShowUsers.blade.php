@@ -26,6 +26,11 @@
     				
     				<td>{{ $user->name }}</td> <td>{{$user->email}}</td> <td>{{$user->country}} &nbsp;</td>
     				
+    				<td>
+
+				       <a class="btn btn-small btn-info" style="background-color:green" 
+				       href="{{URL::to('profile/browse', array($user->email))}}"> Browse </a>
+					<td>
     			
 					<td></td>
 					<td></td>
