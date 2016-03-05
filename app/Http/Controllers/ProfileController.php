@@ -2,6 +2,8 @@
 
 use DB;
 use Auth;
+use Input;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller {
 
@@ -39,6 +41,9 @@ class ProfileController extends Controller {
 
 	public function edit()
 	{
+
+		return view('edit'); // Redirecting to the edit page to show the form for editing current user
+
 	}
 
 	public function destroy($id)
@@ -47,6 +52,35 @@ class ProfileController extends Controller {
 
 	public function update()
 	{  
+		$rules = array(
+            'name' => 'required|max:255',
+			'phone' => 'required|max:15',
+			 'dob' => 'required',
+			'country' => 'required',
+			'city' => 'required',
+			'address' => 'required',   
+        ); // Validations on the data sent through Edit Form
+
+        $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+            	return view('edit');
+      		  } 
+
+      		else {
+          		DB::table('users')
+                ->where('email', Auth::user()->email)
+                ->update(array( 'password' => Auth::user()->password,
+               	'country' => Input::get('country'),
+               	'city' => Input::get('city'),
+               	'phone' => Input::get('phone'),
+               	'address' => Input::get('address'),
+               	'dob' => Input::get('dob'),
+               	'name' => Input::get('name')
+               	)); // Saving the Changes to profile
+
+               	return Redirect('profile');
+        	  }
 	}
 
 	public function browUser($id)

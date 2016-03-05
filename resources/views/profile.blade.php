@@ -32,6 +32,11 @@
 
 					<div class="col-md-8 col-md-offset-3">
 								
+							<a class="btn btn-small btn-info" 
+							   href="{{ URL::to('profile/' . Auth::user()->email . '/edit') }}">
+							   Edit Your Profile</a>
+
+							 &nbsp;&nbsp;
 								
 							<a class="btn btn-small btn-info" 
 							   href="{{ URL::to('profile/show') }}">
